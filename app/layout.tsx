@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Aulify - Gestión Escolar Integral',
+  title: 'Alumnix - Gestión Escolar Integral',
   description: 'Notas, asistencia, sanciones, mensajería y calendario escolar — todo en un solo lugar.',
   generator: 'v0.app',
   icons: {

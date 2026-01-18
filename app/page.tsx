@@ -39,6 +39,7 @@ import {
   CheckCircle2,
 } from "lucide-react"
 import logoColor from "@/imagenes/Logo Color.png"
+import iconColor from "@/imagenes/Icono Color.png"
 
 // Header Component
 function Header() {
@@ -59,7 +60,7 @@ function Header() {
         <a href="#" className="flex items-center">
           <Image
             src={logoColor}
-            alt="Aulify"
+            alt="Alumnix"
             className="h-10 w-auto sm:h-11"
             priority
           />
@@ -125,13 +126,13 @@ function Header() {
 // Hero Section
 function HeroSection() {
   const stats = [
-    { value: "500+", label: "Usuarios activos", note: "ilustrativo" },
-    { value: "5", label: "Roles disponibles", note: "Admin, Docente, Preceptor, Padre, Alumno" },
-    { value: "40%", label: "Tiempo ahorrado", note: "estimación" },
+    { value: "Seguridad", label: "Bases de datos protegidas" },
+    { value: "Todo en un solo sistema", label: "Seguimiento completo por alumno" },
+    { value: "Mensajeria interna", label: "Inbox institucional para docentes y familias." },
   ]
 
   return (
-    <section className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
+    <section className="relative overflow-hidden pt-6 pb-8 sm:pt-10 sm:pb-14 lg:pt-14 lg:pb-16">
       {/* Background gradient */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
       
@@ -246,9 +247,13 @@ function HeroSection() {
         <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8">
           {stats.map((stat) => (
             <div key={stat.label} className="rounded-xl border bg-card p-6 text-center shadow-sm">
-              <p className="text-3xl font-bold text-primary">{stat.value}</p>
-              <p className="mt-1 text-sm font-medium text-foreground">{stat.label}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">({stat.note})</p>
+              <p className="text-3xl font-bold text-primary sm:text-4xl">{stat.value}</p>
+              <p className="mt-2 text-base font-semibold text-foreground sm:text-lg">
+                {stat.label}
+              </p>
+              {stat.note && (
+                <p className="mt-0.5 text-xs text-muted-foreground">({stat.note})</p>
+              )}
             </div>
           ))}
         </div>
@@ -268,7 +273,7 @@ function FeaturesSection() {
     {
       icon: ClipboardCheck,
       title: "Asistencia completa",
-      description: "Registra Presente, Ausente o Tarde con detalles. Historial completo por alumno.",
+      description: "Registros de asistencias con detalles. Historial completo por alumno.",
     },
     {
       icon: AlertTriangle,
@@ -293,7 +298,7 @@ function FeaturesSection() {
   ]
 
   return (
-    <section id="features" className="bg-muted/30 py-16 sm:py-24">
+    <section id="features" className="bg-muted/30 pt-10 pb-10 sm:pt-14 sm:pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -331,7 +336,7 @@ function RolesSection() {
   const roles = [
     {
       icon: Users,
-      title: "Admin / Directivos",
+      title: "Directivos",
       description: "Acceso total: configuración, reportes globales y gestión de usuarios.",
     },
     {
@@ -357,7 +362,7 @@ function RolesSection() {
   ]
 
   return (
-    <section id="roles" className="py-16 sm:py-24">
+    <section id="roles" className="pt-10 pb-16 sm:pt-14 sm:pb-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -394,7 +399,6 @@ function SecuritySection() {
     { icon: Lock, label: "HTTPS en todas las conexiones" },
     { icon: Database, label: "Backups automáticos de base de datos" },
     { icon: Activity, label: "Monitoreo y alertas en tiempo real" },
-    { icon: Gauge, label: "Rate limiting para prevenir abusos" },
     { icon: Shield, label: "Separación clara de roles y permisos" },
   ]
 
@@ -411,7 +415,7 @@ function SecuritySection() {
               Los datos escolares son sensibles. Por eso implementamos las mejores prácticas de seguridad para proteger la información de alumnos, padres y personal.
             </p>
             <p className="mt-4 text-background/70">
-              Cumplimos con estándares de protección de datos y mantenemos tu información segura las 24 horas.
+              Cumplimos con estándares de protección de datos y mantendremos la informacion segura las 24 horas.
             </p>
           </div>
 
@@ -495,19 +499,15 @@ function FAQSection() {
   const faqs = [
     {
       question: "¿Es compatible con celulares?",
-      answer: "Sí, Aulify es 100% responsive. Funciona perfectamente en celulares, tablets y computadoras. Los padres y alumnos pueden consultar información desde cualquier dispositivo.",
+      answer: "Sí, Alumnix funciona perfectamente en celulares, tablets y computadoras. Los padres, alumnos y profesores pueden consultar la información desde cualquier dispositivo las 24 horas",
+    },
+    {
+      question: "¿Que se necesita para usar Alumnix?",
+      answer: "Alumnix funciona simplemente con internet. La plataforma es 100% online y es accesible desde cualquier dispositivo",
     },
     {
       question: "¿Padres y alumnos comparten usuario?",
       answer: "No, cada persona tiene su propio usuario con permisos específicos. Los padres ven información de sus hijos, mientras que los alumnos solo ven su propia información.",
-    },
-    {
-      question: "¿Puedo generar reportes en PDF?",
-      answer: "Sí, puedes generar boletines de notas, reportes de asistencia y otros documentos en PDF con un solo clic. Listos para imprimir o enviar por email.",
-    },
-    {
-      question: "¿Las notificaciones por email son opcionales?",
-      answer: "Sí, cada usuario puede configurar sus preferencias de notificación. Pueden elegir recibir alertas por email para ciertos eventos o desactivarlas por completo.",
     },
   ]
 
@@ -519,7 +519,7 @@ function FAQSection() {
             Preguntas frecuentes
           </h2>
           <p className="mt-4 text-pretty text-lg text-muted-foreground">
-            Respuestas a las dudas más comunes sobre Aulify.
+            Respuestas a las dudas más comunes sobre Alumnix.
           </p>
         </div>
 
@@ -581,7 +581,6 @@ function ContactSection() {
               {[
                 "Demo gratuita sin compromiso",
                 "Implementación guiada",
-                "Soporte en español",
                 "Capacitación incluida",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3">
@@ -661,9 +660,6 @@ function ContactSection() {
                 <Button type="submit" className="w-full">
                   Enviar solicitud
                 </Button>
-                <p className="text-center text-xs text-muted-foreground">
-                  * Conectar a backend más adelante
-                </p>
               </form>
             </CardContent>
           </Card>
@@ -688,9 +684,8 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <GraduationCap className="h-6 w-6 text-primary" />
-            <span className="text-lg font-bold text-foreground">Aulify</span>
+          <a href="#" className="flex items-center">
+            <Image src={iconColor} alt="Alumnix" className="h-[68px] w-[68px]" />
           </a>
 
           {/* Links */}
@@ -708,7 +703,7 @@ function Footer() {
 
           {/* Copyright */}
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Aulify
+            © {new Date().getFullYear()} Alumnix
           </p>
         </div>
       </div>
@@ -717,7 +712,7 @@ function Footer() {
 }
 
 // Main Page Component
-export default function AulifyLandingPage() {
+export default function AlumnixLandingPage() {
   return (
     <div className="min-h-screen">
       <Header />
