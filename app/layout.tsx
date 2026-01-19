@@ -1,11 +1,13 @@
 import React from "react"
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Montserrat, Quicksand } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"], weight: ["600"], variable: "--font-montserrat" });
+const quicksand = Quicksand({ subsets: ["latin"], weight: ["400"], variable: "--font-quicksand" });
 
 export const metadata: Metadata = {
   title: 'Alumnix - Gestión Escolar Integral',
@@ -37,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`font-sans antialiased`}>
+      <body className={`${montserrat.variable} ${quicksand.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

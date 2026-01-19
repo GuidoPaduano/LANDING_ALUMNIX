@@ -140,7 +140,7 @@ function HeroSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column - Content */}
           <div className="flex flex-col gap-6">
-            <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            <h1 className="text-balance text-4xl font-title font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               La gestión escolar simplificada
             </h1>
             <p className="text-pretty text-lg text-muted-foreground sm:text-xl">
@@ -247,8 +247,8 @@ function HeroSection() {
         <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8">
           {stats.map((stat) => (
             <div key={stat.label} className="rounded-xl border bg-card p-6 text-center shadow-sm">
-              <p className="text-3xl font-bold text-primary sm:text-4xl">{stat.value}</p>
-              <p className="mt-2 text-base font-semibold text-foreground sm:text-lg">
+              <p className="text-3xl font-title font-semibold text-primary sm:text-4xl">{stat.value}</p>
+              <p className="mt-2 text-base font-title font-semibold text-foreground sm:text-lg">
                 {stat.label}
               </p>
               {stat.note && (
@@ -301,7 +301,7 @@ function FeaturesSection() {
     <section id="features" className="bg-muted/30 pt-10 pb-10 sm:pt-14 sm:pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
             Todo lo que necesita tu escuela
           </h2>
           <p className="mt-4 text-pretty text-lg text-muted-foreground">
@@ -365,7 +365,7 @@ function RolesSection() {
     <section id="roles" className="pt-10 pb-16 sm:pt-14 sm:pb-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
             Un rol para cada usuario
           </h2>
           <p className="mt-4 text-pretty text-lg text-muted-foreground">
@@ -408,7 +408,7 @@ function SecuritySection() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column */}
           <div>
-            <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="text-balance text-3xl font-title font-semibold tracking-tight sm:text-4xl">
               Seguridad y privacidad
             </h2>
             <p className="mt-4 text-pretty text-lg text-background/80">
@@ -456,7 +456,7 @@ function DemoCTASection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-2xl bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-8 sm:p-12 lg:p-16">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
               Comienza en 3 simples pasos
             </h2>
             <p className="mt-4 text-pretty text-lg text-muted-foreground">
@@ -474,7 +474,7 @@ function DemoCTASection() {
                 <div className="relative mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground">
                   {step.number}
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">{step.title}</h3>
+                <h3 className="text-lg font-title font-semibold text-foreground">{step.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{step.description}</p>
               </div>
             ))}
@@ -515,7 +515,7 @@ function FAQSection() {
     <section id="faq" className="bg-muted/30 py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
             Preguntas frecuentes
           </h2>
           <p className="mt-4 text-pretty text-lg text-muted-foreground">
@@ -571,7 +571,7 @@ function ContactSection() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column - Pitch */}
           <div>
-            <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
               ¿Listo para modernizar tu escuela?
             </h2>
             <p className="mt-4 text-pretty text-lg text-muted-foreground">
