@@ -125,7 +125,7 @@ function Header() {
 
 // Hero Section
 function HeroSection() {
-  const stats = [
+  const stats: { value: string; label: string; note?: string }[] = [
     { value: "Seguridad", label: "Bases de datos protegidas" },
     { value: "Todo en un solo sistema", label: "Seguimiento completo por alumno" },
     { value: "Mensajeria interna", label: "Inbox institucional para docentes y familias." },
