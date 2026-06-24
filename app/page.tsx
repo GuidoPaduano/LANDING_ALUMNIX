@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useState } from "react"
 import {
   Activity, ArrowRight, BarChart3, Bell, BookOpen, CalendarDays, Check,
-  CheckCircle2, ChevronRight, ClipboardCheck, FileText, GraduationCap,
+  CheckCircle2, ClipboardCheck, FileText, GraduationCap,
   LayoutDashboard, LockKeyhole, Mail, Menu, MessageSquareText, MoreHorizontal,
   ShieldCheck, UserCheck, Users, X,
 } from "lucide-react"
@@ -112,7 +112,6 @@ function HeroSection() {
           <p className="mt-6 max-w-xl text-pretty text-lg leading-8 text-slate-600">Centralizá la gestión académica, mejorá la comunicación y acompañá a cada alumno con información clara y actualizada.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild className="h-13 rounded-full bg-blue-700 px-7 text-base shadow-[0_12px_28px_-10px_rgba(29,78,216,0.8)] hover:bg-blue-800"><a href="#contacto">Solicitar una demo <ArrowRight /></a></Button>
-            <Button asChild variant="outline" className="h-13 rounded-full border-slate-300 bg-white/70 px-7 text-base text-slate-800 shadow-none hover:bg-white"><a href="#funcionalidades">Conocer la plataforma</a></Button>
           </div>
           <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-slate-600">{["Implementación acompañada", "Acceso multidispositivo", "Soporte cercano"].map((item) => <span key={item} className="flex items-center gap-2"><Check className="size-4 text-emerald-600" />{item}</span>)}</div>
         </div>
@@ -137,7 +136,7 @@ function FeaturesSection() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-end"><div><p className="eyebrow">Todo lo importante</p><h2 className="section-title mt-4">Menos tareas repetitivas. Más tiempo para educar.</h2></div><p className="max-w-2xl text-lg leading-8 text-slate-600 lg:justify-self-end">Alumnix ordena la información cotidiana de tu institución y la convierte en una experiencia clara para toda la comunidad.</p></div>
         <div className="mt-14 grid gap-px overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-200 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => <article key={feature.title} className="group bg-white p-7 transition duration-300 hover:bg-slate-50 sm:p-8"><div className="flex items-start justify-between"><span className={`grid size-12 place-items-center rounded-2xl ${feature.color}`}><feature.icon className="size-5" /></span><span className="font-mono text-xs text-slate-300">0{index + 1}</span></div><h3 className="mt-8 text-xl font-bold text-slate-950">{feature.title}</h3><p className="mt-3 leading-7 text-slate-600">{feature.text}</p><ChevronRight className="mt-6 size-5 -translate-x-1 text-blue-600 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" /></article>)}
+          {features.map((feature) => <article key={feature.title} className="bg-white p-7 transition duration-300 hover:bg-slate-50 sm:p-8"><span className={`grid size-12 place-items-center rounded-2xl ${feature.color}`}><feature.icon className="size-5" /></span><h3 className="mt-8 text-xl font-bold text-slate-950">{feature.title}</h3><p className="mt-3 leading-7 text-slate-600">{feature.text}</p></article>)}
         </div>
       </div>
     </section>
