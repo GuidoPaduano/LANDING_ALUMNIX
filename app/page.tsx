@@ -1,731 +1,204 @@
 "use client"
 
-import React from "react"
 import Image from "next/image"
-
 import { useState } from "react"
+import {
+  Activity, ArrowRight, BarChart3, Bell, BookOpen, CalendarDays, Check,
+  CheckCircle2, ChevronRight, ClipboardCheck, FileText, GraduationCap,
+  LayoutDashboard, LockKeyhole, Mail, Menu, MessageSquareText, MoreHorizontal,
+  ShieldCheck, UserCheck, Users, X,
+} from "lucide-react"
+
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import {
-  GraduationCap,
-  ClipboardCheck,
-  AlertTriangle,
-  Mail,
-  Calendar,
-  Shield,
-  Users,
-  BookOpen,
-  UserCheck,
-  Baby,
-  User,
-  Lock,
-  Database,
-  Activity,
-  Gauge,
-  ChevronRight,
-  Bell,
-  FileText,
-  Menu,
-  X,
-  CheckCircle2,
-} from "lucide-react"
 import logoColor from "@/imagenes/Logo Color.png"
 import iconColor from "@/imagenes/Icono Color.png"
 
-// Header Component
+const navLinks = [
+  { label: "Plataforma", href: "#plataforma" },
+  { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Comunidad", href: "#comunidad" },
+  { label: "Seguridad", href: "#seguridad" },
+]
+
 function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  const navLinks = [
-    { label: "Funcionalidades", href: "#features" },
-    { label: "Roles", href: "#roles" },
-    { label: "Seguridad", href: "#security" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contacto", href: "#contact" },
-  ]
-
+  const [open, setOpen] = useState(false)
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <a href="#" className="flex items-center">
-          <Image
-            src={logoColor}
-            alt="Alumnix"
-            className="h-10 w-auto sm:h-11"
-            priority
-          />
-        </a>
-
-        {/* Desktop Nav */}
-        <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
+    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl">
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <a href="#" aria-label="Ir al inicio"><Image src={logoColor} alt="Alumnix" className="h-10 w-auto" priority /></a>
+        <nav className="hidden items-center gap-8 lg:flex">
+          {navLinks.map((link) => <a key={link.href} href={link.href} className="text-sm font-semibold text-slate-600 transition hover:text-blue-700">{link.label}</a>)}
         </nav>
-
-        {/* CTA Button */}
-        <div className="hidden md:block">
-          <Button asChild>
-            <a href="#contact">Solicitar acceso</a>
-          </Button>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          type="button"
-          className="md:hidden"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        <Button asChild className="hidden h-11 rounded-full bg-slate-950 px-5 text-white shadow-none hover:bg-blue-700 lg:inline-flex">
+          <a href="https://proyecto-comunicaciones.vercel.app/">Acceso plataforma <ArrowRight /></a>
+        </Button>
+        <button type="button" onClick={() => setOpen(!open)} className="grid size-10 place-items-center rounded-full border border-slate-200 text-slate-800 lg:hidden" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open}>
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
       </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="border-t border-border md:hidden">
-          <nav className="flex flex-col gap-2 p-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
-            <Button asChild className="mt-2">
-              <a href="#contact" onClick={() => setMobileMenuOpen(false)}>
-                Solicitar acceso
-              </a>
-            </Button>
-          </nav>
-        </div>
+      {open && (
+        <nav className="border-t border-slate-200 bg-white px-5 py-5 lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1">
+            {navLinks.map((link) => <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="rounded-xl px-3 py-3 font-semibold text-slate-700 hover:bg-slate-50">{link.label}</a>)}
+            <Button asChild className="mt-3 h-11 rounded-full bg-slate-950"><a href="https://proyecto-comunicaciones.vercel.app/" onClick={() => setOpen(false)}>Acceso plataforma <ArrowRight /></a></Button>
+          </div>
+        </nav>
       )}
     </header>
   )
 }
 
-// Hero Section
-function HeroSection() {
-  const stats: { value: string; label: string; note?: string }[] = [
-    { value: "Seguridad", label: "Bases de datos protegidas" },
-    { value: "Todo en un solo sistema", label: "Seguimiento completo por alumno" },
-    { value: "Mensajeria interna", label: "Inbox institucional para docentes y familias." },
-  ]
-
+function ProductPreview() {
+  const chart = [38, 56, 43, 72, 61, 82, 74, 91]
   return (
-    <section className="relative overflow-hidden pt-6 pb-8 sm:pt-10 sm:pb-14 lg:pt-14 lg:pb-16">
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-      
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left Column - Content */}
-          <div className="flex flex-col gap-6">
-            <h1 className="text-balance text-4xl font-title font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              La gestión escolar simplificada
-            </h1>
-            <p className="text-pretty text-lg text-muted-foreground sm:text-xl">
-              Notas, asistencia, sanciones, mensajería y calendario escolar — todo en un solo lugar.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-              <Button size="lg" asChild>
-                <a href="#contact">
-                  Solicitar acceso
-                  <ChevronRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <a href="#features">Ver funcionalidades</a>
-              </Button>
-            </div>
+    <div className="relative mx-auto w-full max-w-2xl lg:mx-0">
+      <div className="absolute -inset-8 -z-10 rounded-full bg-blue-400/20 blur-3xl" />
+      <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950 p-2 shadow-[0_35px_90px_-30px_rgba(15,23,42,0.65)] sm:rounded-[2rem] sm:p-3">
+        <div className="overflow-hidden rounded-[1.1rem] bg-slate-50 sm:rounded-[1.4rem]">
+          <div className="flex h-11 items-center justify-between border-b border-slate-200 bg-white px-4">
+            <div className="flex gap-1.5"><span className="size-2.5 rounded-full bg-red-400" /><span className="size-2.5 rounded-full bg-amber-400" /><span className="size-2.5 rounded-full bg-emerald-400" /></div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">Panel institucional</span>
+            <Bell className="size-4 text-slate-400" />
           </div>
-
-          {/* Right Column - Dashboard Mockup */}
-          <div className="relative">
-            <Card className="overflow-hidden shadow-2xl">
-              <CardHeader className="border-b bg-muted/50 pb-3">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-base font-medium">Panel de control</CardTitle>
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-                    </span>
-                    <span className="text-xs text-muted-foreground">En línea</span>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-4">
-                {/* Notifications */}
-                <div className="mb-4 rounded-lg bg-primary/10 p-3">
-                  <div className="flex items-center gap-2">
-                    <Bell className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium text-foreground">3 notificaciones nuevas</span>
-                  </div>
-                </div>
-                
-                {/* Dashboard Cards Grid */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-lg border bg-card p-3 shadow-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="rounded-md bg-chart-1/10 p-2">
-                        <GraduationCap className="h-4 w-4 text-chart-1" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Notas</p>
-                        <p className="text-sm font-semibold">24 pendientes</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg border bg-card p-3 shadow-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="rounded-md bg-accent/10 p-2">
-                        <ClipboardCheck className="h-4 w-4 text-accent" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Asistencia</p>
-                        <p className="text-sm font-semibold">98% hoy</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg border bg-card p-3 shadow-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="rounded-md bg-chart-5/10 p-2">
-                        <AlertTriangle className="h-4 w-4 text-chart-5" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Sanciones</p>
-                        <p className="text-sm font-semibold">2 esta semana</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg border bg-card p-3 shadow-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="rounded-md bg-chart-4/10 p-2">
-                        <Calendar className="h-4 w-4 text-chart-4" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Calendario</p>
-                        <p className="text-sm font-semibold">5 eventos</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            {/* Floating Badge */}
-            <div className="absolute -bottom-4 -left-4 rounded-lg border bg-card p-3 shadow-lg">
-              <div className="flex items-center gap-2">
-                <FileText className="h-5 w-5 text-primary" />
-                <span className="text-sm font-medium">PDF generado</span>
+          <div className="flex min-h-[390px] sm:min-h-[450px]">
+            <aside className="hidden w-15 shrink-0 flex-col items-center gap-3 border-r border-slate-200 bg-white py-5 sm:flex">
+              <Image src={iconColor} alt="" className="mb-2 size-8 object-contain" />
+              {[LayoutDashboard, GraduationCap, ClipboardCheck, Mail, CalendarDays].map((Icon, index) => <div key={index} className={`grid size-9 place-items-center rounded-xl ${index === 0 ? "bg-blue-600 text-white" : "text-slate-400"}`}><Icon className="size-4" /></div>)}
+            </aside>
+            <div className="min-w-0 flex-1 p-4 sm:p-6">
+              <div className="flex items-start justify-between">
+                <div><p className="text-xs font-semibold text-blue-600">Miércoles, 24 de junio</p><h3 className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">Buen día, Dirección</h3></div>
+                <div className="grid size-9 place-items-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">DR</div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="rounded-xl border bg-card p-6 text-center shadow-sm">
-              <p className="text-3xl font-title font-semibold text-primary sm:text-4xl">{stat.value}</p>
-              <p className="mt-2 text-base font-title font-semibold text-foreground sm:text-lg">
-                {stat.label}
-              </p>
-              {stat.note && (
-                <p className="mt-0.5 text-xs text-muted-foreground">({stat.note})</p>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// Features Section
-function FeaturesSection() {
-  const features = [
-    {
-      icon: GraduationCap,
-      title: "Notas y reportes PDF",
-      description: "Carga y consulta de calificaciones por materia. Genera boletines en PDF con un clic.",
-    },
-    {
-      icon: ClipboardCheck,
-      title: "Asistencia completa",
-      description: "Registros de asistencias con detalles. Historial completo por alumno.",
-    },
-    {
-      icon: AlertTriangle,
-      title: "Libro de sanciones",
-      description: "Registro de amonestaciones y observaciones con fecha, motivo y seguimiento.",
-    },
-    {
-      icon: Mail,
-      title: "Mensajería interna",
-      description: "Bandeja de entrada, comunicados y anuncios para toda la comunidad escolar.",
-    },
-    {
-      icon: Calendar,
-      title: "Calendario escolar",
-      description: "Eventos por curso y tipo: exámenes, entregas, actos. Filtros y vistas personalizadas.",
-    },
-    {
-      icon: Shield,
-      title: "Permisos y auditoría",
-      description: "Control de acceso por rol. Registro de todas las acciones para trazabilidad.",
-    },
-  ]
-
-  return (
-    <section id="features" className="bg-muted/30 pt-10 pb-10 sm:pt-14 sm:pb-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
-            Todo lo que necesita tu escuela
-          </h2>
-          <p className="mt-4 text-pretty text-lg text-muted-foreground">
-            Funcionalidades diseñadas para simplificar la gestión académica diaria.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature) => (
-            <Card key={feature.title} className="transition-shadow hover:shadow-lg">
-              <CardHeader>
-                <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                  <feature.icon className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle className="text-lg">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-sm leading-relaxed">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// Roles Section
-function RolesSection() {
-  const roles = [
-    {
-      icon: Users,
-      title: "Directivos",
-      description: "Acceso total: configuración, reportes globales y gestión de usuarios.",
-    },
-    {
-      icon: BookOpen,
-      title: "Docentes",
-      description: "Carga de notas, asistencia y comunicación con alumnos y padres.",
-    },
-    {
-      icon: UserCheck,
-      title: "Preceptores",
-      description: "Gestión de asistencia, sanciones y seguimiento de alumnos.",
-    },
-    {
-      icon: Baby,
-      title: "Padres",
-      description: "Consulta de notas, asistencia, calendario y comunicación con la escuela.",
-    },
-    {
-      icon: User,
-      title: "Alumnos",
-      description: "Vista de sus propias notas, asistencia y eventos del calendario.",
-    },
-  ]
-
-  return (
-    <section id="roles" className="pt-10 pb-16 sm:pt-14 sm:pb-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
-            Un rol para cada usuario
-          </h2>
-          <p className="mt-4 text-pretty text-lg text-muted-foreground">
-            Cada persona accede solo a lo que necesita. Seguro y organizado.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-          {roles.map((role) => (
-            <Card key={role.title} className="text-center transition-shadow hover:shadow-lg">
-              <CardHeader className="pb-2">
-                <div className="mx-auto mb-2 flex h-14 w-14 items-center justify-center rounded-full bg-accent/10">
-                  <role.icon className="h-7 w-7 text-accent" />
-                </div>
-                <CardTitle className="text-base">{role.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-sm">{role.description}</CardDescription>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// Security Section
-function SecuritySection() {
-  const securityItems = [
-    { icon: Lock, label: "HTTPS en todas las conexiones" },
-    { icon: Database, label: "Backups automáticos de base de datos" },
-    { icon: Activity, label: "Monitoreo y alertas en tiempo real" },
-    { icon: Shield, label: "Separación clara de roles y permisos" },
-  ]
-
-  return (
-    <section id="security" className="bg-foreground py-16 text-background sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left Column */}
-          <div>
-            <h2 className="text-balance text-3xl font-title font-semibold tracking-tight sm:text-4xl">
-              Seguridad y privacidad
-            </h2>
-            <p className="mt-4 text-pretty text-lg text-background/80">
-              Los datos escolares son sensibles. Por eso implementamos las mejores prácticas de seguridad para proteger la información de alumnos, padres y personal.
-            </p>
-            <p className="mt-4 text-background/70">
-              Cumplimos con estándares de protección de datos y mantendremos la informacion segura las 24 horas.
-            </p>
-          </div>
-
-          {/* Right Column - Checklist Card */}
-          <Card className="bg-background/10 backdrop-blur">
-            <CardHeader>
-              <CardTitle className="text-background">Checklist técnico</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-4">
-                {securityItems.map((item) => (
-                  <li key={item.label} className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent/20">
-                      <item.icon className="h-4 w-4 text-accent" />
-                    </div>
-                    <span className="text-sm text-background/90">{item.label}</span>
-                  </li>
+              <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-3">
+                {[["Asistencia", "94,8%", "bg-emerald-50 text-emerald-700"], ["Alumnos", "486", "bg-blue-50 text-blue-700"], ["Mensajes", "12", "bg-violet-50 text-violet-700"]].map(([label, value, style]) => (
+                  <div key={label} className="rounded-xl border border-slate-200 bg-white p-2.5 shadow-sm sm:p-4"><span className={`inline-block rounded-md px-1.5 py-1 text-[8px] font-bold uppercase sm:text-[9px] ${style}`}>{label}</span><p className="mt-2 text-xl font-bold text-slate-900 sm:text-2xl">{value}</p></div>
                 ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// Demo CTA Section
-function DemoCTASection() {
-  const steps = [
-    { number: "1", title: "Crear", description: "Configura tu escuela y usuarios en minutos." },
-    { number: "2", title: "Notificar", description: "Invita a docentes, preceptores y familias." },
-    { number: "3", title: "Consultar", description: "Accede a notas, asistencia y más al instante." },
-  ]
-
-  return (
-    <section className="py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-8 sm:p-12 lg:p-16">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
-              Comienza en 3 simples pasos
-            </h2>
-            <p className="mt-4 text-pretty text-lg text-muted-foreground">
-              Sin complicaciones. Tu escuela funcionando en minutos.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-8 sm:grid-cols-3">
-            {steps.map((step, index) => (
-              <div key={step.number} className="relative text-center">
-                {/* Connector line */}
-                {index < steps.length - 1 && (
-                  <div className="absolute left-1/2 top-8 hidden h-0.5 w-full bg-border sm:block" />
-                )}
-                <div className="relative mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground">
-                  {step.number}
-                </div>
-                <h3 className="text-lg font-title font-semibold text-foreground">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{step.description}</p>
               </div>
-            ))}
+              <div className="mt-3 grid gap-3 sm:grid-cols-[1.45fr_1fr]">
+                <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                  <div className="flex items-center justify-between"><div><p className="text-xs font-bold text-slate-800">Asistencia semanal</p><p className="text-[10px] text-slate-400">Últimos 8 días</p></div><MoreHorizontal className="size-4 text-slate-400" /></div>
+                  <div className="mt-4 flex h-28 items-end gap-2">{chart.map((height, index) => <div key={index} className="flex-1 rounded-t bg-blue-100" style={{ height: `${height}%` }}><div className="h-full rounded-t bg-gradient-to-t from-blue-600 to-cyan-400 opacity-90" /></div>)}</div>
+                </div>
+                <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                  <p className="text-xs font-bold text-slate-800">Actividad reciente</p>
+                  <div className="mt-3 space-y-3">{["Calificaciones cargadas", "Nuevo comunicado", "Reporte generado"].map((item, index) => <div key={item} className="flex gap-2"><span className={`mt-1 size-2 shrink-0 rounded-full ${["bg-blue-500", "bg-violet-500", "bg-emerald-500"][index]}`} /><div><p className="text-[10px] font-semibold leading-tight text-slate-700">{item}</p><p className="mt-0.5 text-[9px] text-slate-400">Hace {index + 1} h</p></div></div>)}</div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div className="mt-12 text-center">
-            <Button size="lg" asChild>
-              <a href="#contact">
-                Solicitar demo gratuita
-                <ChevronRight className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
-          </div>
         </div>
       </div>
-    </section>
-  )
-}
-
-// FAQ Section
-function FAQSection() {
-  const faqs = [
-    {
-      question: "¿Es compatible con celulares?",
-      answer: "Sí, Alumnix funciona perfectamente en celulares, tablets y computadoras. Los padres, alumnos y profesores pueden consultar la información desde cualquier dispositivo las 24 horas",
-    },
-    {
-      question: "¿Que se necesita para usar Alumnix?",
-      answer: "Alumnix funciona simplemente con internet. La plataforma es 100% online y es accesible desde cualquier dispositivo",
-    },
-    {
-      question: "¿Padres y alumnos comparten usuario?",
-      answer: "No, cada persona tiene su propio usuario con permisos específicos. Los padres ven información de sus hijos, mientras que los alumnos solo ven su propia información.",
-    },
-  ]
-
-  return (
-    <section id="faq" className="bg-muted/30 py-16 sm:py-24">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
-            Preguntas frecuentes
-          </h2>
-          <p className="mt-4 text-pretty text-lg text-muted-foreground">
-            Respuestas a las dudas más comunes sobre Alumnix.
-          </p>
-        </div>
-
-        <Accordion type="single" collapsible className="mt-12">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="text-left text-base font-medium">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+      <div className="absolute -bottom-5 -left-2 hidden items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3.5 shadow-xl sm:flex lg:-left-10">
+        <span className="grid size-10 place-items-center rounded-xl bg-emerald-100"><CheckCircle2 className="size-5 text-emerald-600" /></span><div><p className="text-xs font-bold text-slate-900">Asistencia completa</p><p className="text-[10px] text-slate-500">Todos los cursos actualizados</p></div>
       </div>
-    </section>
-  )
-}
-
-// Contact Section
-function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    school: "",
-    email: "",
-    students: "",
-    message: "",
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Demo-only submit handler
-    alert(
-      `¡Gracias ${formData.name}! Hemos recibido tu solicitud para ${formData.school}. Te contactaremos pronto.`
-    )
-    setFormData({ name: "", school: "", email: "", students: "", message: "" })
-  }
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  return (
-    <section id="contact" className="py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left Column - Pitch */}
-          <div>
-            <h2 className="text-balance text-3xl font-title font-semibold tracking-tight text-foreground sm:text-4xl">
-              ¿Listo para modernizar tu escuela?
-            </h2>
-            <p className="mt-4 text-pretty text-lg text-muted-foreground">
-              Completa el formulario y nos pondremos en contacto para coordinar una demo personalizada.
-            </p>
-            <ul className="mt-8 space-y-4">
-              {[
-                "Demo gratuita sin compromiso",
-                "Implementación guiada",
-                "Capacitación incluida",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-accent" />
-                  <span className="text-muted-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Right Column - Form */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Solicitar acceso</CardTitle>
-              <CardDescription>
-                Completa tus datos y te contactaremos en 24-48 horas.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Nombre completo</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Juan Pérez"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="school">Nombre de la escuela</Label>
-                  <Input
-                    id="school"
-                    name="school"
-                    value={formData.school}
-                    onChange={handleChange}
-                    placeholder="Escuela N° 123"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="juan@escuela.edu.ar"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="students">Cantidad de alumnos</Label>
-                  <Input
-                    id="students"
-                    name="students"
-                    type="number"
-                    value={formData.students}
-                    onChange={handleChange}
-                    placeholder="500"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Mensaje (opcional)</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Cuéntanos sobre tu escuela..."
-                    rows={3}
-                  />
-                </div>
-                <Button type="submit" className="w-full">
-                  Enviar solicitud
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// Footer
-function Footer() {
-  const links = [
-    { label: "Funcionalidades", href: "#features" },
-    { label: "Roles", href: "#roles" },
-    { label: "Seguridad", href: "#security" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contacto", href: "#contact" },
-  ]
-
-  return (
-    <footer className="border-t border-border bg-muted/30">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          {/* Logo */}
-          <a href="#" className="flex items-center">
-            <Image src={iconColor} alt="Alumnix" className="h-[68px] w-[68px]" />
-          </a>
-
-          {/* Links */}
-          <nav className="flex flex-wrap justify-center gap-4 sm:gap-6">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Copyright */}
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Alumnix
-          </p>
-        </div>
-      </div>
-    </footer>
-  )
-}
-
-// Main Page Component
-export default function AlumnixLandingPage() {
-  return (
-    <div className="min-h-screen">
-      <Header />
-      <main>
-        <HeroSection />
-        <FeaturesSection />
-        <RolesSection />
-        <SecuritySection />
-        <DemoCTASection />
-        <FAQSection />
-        <ContactSection />
-      </main>
-      <Footer />
     </div>
   )
+}
+
+function HeroSection() {
+  return (
+    <section id="plataforma" className="relative overflow-hidden bg-[linear-gradient(135deg,#f8fbff_0%,#eef6ff_55%,#f6f3ff_100%)] py-16 sm:py-20 lg:py-24">
+      <div className="hero-grid absolute inset-0 opacity-50" /><div className="absolute -left-32 top-24 size-80 rounded-full bg-cyan-300/20 blur-3xl" /><div className="absolute -right-40 -top-20 size-[32rem] rounded-full bg-blue-300/25 blur-3xl" />
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[0.88fr_1.12fr] lg:gap-16">
+        <div>
+          <h1 className="max-w-2xl text-balance font-title text-4xl font-semibold leading-[1.08] tracking-[-0.04em] text-slate-950 sm:text-5xl lg:text-[4rem]">Tu escuela conectada en <span className="text-gradient">un solo lugar.</span></h1>
+          <p className="mt-6 max-w-xl text-pretty text-lg leading-8 text-slate-600">Centralizá la gestión académica, mejorá la comunicación y acompañá a cada alumno con información clara y actualizada.</p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button asChild className="h-13 rounded-full bg-blue-700 px-7 text-base shadow-[0_12px_28px_-10px_rgba(29,78,216,0.8)] hover:bg-blue-800"><a href="#contacto">Solicitar una demo <ArrowRight /></a></Button>
+            <Button asChild variant="outline" className="h-13 rounded-full border-slate-300 bg-white/70 px-7 text-base text-slate-800 shadow-none hover:bg-white"><a href="#funcionalidades">Conocer la plataforma</a></Button>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-slate-600">{["Implementación acompañada", "Acceso multidispositivo", "Soporte cercano"].map((item) => <span key={item} className="flex items-center gap-2"><Check className="size-4 text-emerald-600" />{item}</span>)}</div>
+        </div>
+        <ProductPreview />
+      </div>
+    </section>
+  )
+}
+
+const features = [
+  { icon: ClipboardCheck, title: "Asistencia simple", text: "Tomá asistencia por curso y consultá historiales individuales en segundos.", color: "bg-blue-100 text-blue-700" },
+  { icon: GraduationCap, title: "Notas y boletines", text: "Cargá calificaciones, generá reportes y compartí el progreso académico.", color: "bg-violet-100 text-violet-700" },
+  { icon: MessageSquareText, title: "Comunicación centralizada", text: "Conectá a directivos, docentes y familias desde un canal institucional.", color: "bg-cyan-100 text-cyan-700" },
+  { icon: CalendarDays, title: "Agenda escolar", text: "Organizá exámenes, entregas, actos y recordatorios por curso.", color: "bg-amber-100 text-amber-700" },
+  { icon: FileText, title: "Seguimiento integral", text: "Reuní observaciones, sanciones y documentación en un único perfil.", color: "bg-rose-100 text-rose-700" },
+  { icon: BarChart3, title: "Información para decidir", text: "Visualizá indicadores clave y detectá situaciones que necesitan atención.", color: "bg-emerald-100 text-emerald-700" },
+]
+
+function FeaturesSection() {
+  return (
+    <section id="funcionalidades" className="bg-white py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-end"><div><p className="eyebrow">Todo lo importante</p><h2 className="section-title mt-4">Menos tareas repetitivas. Más tiempo para educar.</h2></div><p className="max-w-2xl text-lg leading-8 text-slate-600 lg:justify-self-end">Alumnix ordena la información cotidiana de tu institución y la convierte en una experiencia clara para toda la comunidad.</p></div>
+        <div className="mt-14 grid gap-px overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-200 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature, index) => <article key={feature.title} className="group bg-white p-7 transition duration-300 hover:bg-slate-50 sm:p-8"><div className="flex items-start justify-between"><span className={`grid size-12 place-items-center rounded-2xl ${feature.color}`}><feature.icon className="size-5" /></span><span className="font-mono text-xs text-slate-300">0{index + 1}</span></div><h3 className="mt-8 text-xl font-bold text-slate-950">{feature.title}</h3><p className="mt-3 leading-7 text-slate-600">{feature.text}</p><ChevronRight className="mt-6 size-5 -translate-x-1 text-blue-600 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" /></article>)}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function CommunitySection() {
+  const roles = [
+    { icon: LayoutDashboard, role: "Directivos", text: "Una visión completa para gestionar y tomar decisiones." },
+    { icon: BookOpen, role: "Docentes", text: "Herramientas ágiles para el trabajo de todos los días." },
+    { icon: UserCheck, role: "Preceptores", text: "Seguimiento claro de asistencia y convivencia." },
+    { icon: Users, role: "Familias y alumnos", text: "Información disponible y comunicación más cercana." },
+  ]
+  return (
+    <section id="comunidad" className="overflow-hidden bg-slate-950 py-20 text-white sm:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+        <div><p className="eyebrow !text-cyan-300">Una comunidad conectada</p><h2 className="section-title mt-4 !text-white">Cada persona ve exactamente lo que necesita.</h2><p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">Los permisos por rol hacen que la experiencia sea simple, segura y relevante para cada integrante de la institución.</p><Button asChild variant="outline" className="mt-8 h-12 rounded-full border-white/20 bg-white/5 px-6 text-white hover:bg-white hover:text-slate-950"><a href="#contacto">Ver Alumnix en acción <ArrowRight /></a></Button></div>
+        <div className="grid gap-4 sm:grid-cols-2">{roles.map((item, index) => <article key={item.role} className={`rounded-3xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur transition hover:-translate-y-1 hover:bg-white/[0.1] ${index % 2 ? "sm:translate-y-6" : ""}`}><span className="grid size-11 place-items-center rounded-2xl bg-blue-500/15 text-cyan-300"><item.icon className="size-5" /></span><h3 className="mt-6 text-lg font-bold">{item.role}</h3><p className="mt-2 leading-6 text-slate-400">{item.text}</p></article>)}</div>
+      </div></div>
+    </section>
+  )
+}
+
+function SecuritySection() {
+  const checks = ["Accesos diferenciados por rol", "Conexiones protegidas", "Registro de actividad", "Respaldo periódico de datos"]
+  return (
+    <section id="seguridad" className="bg-slate-50 py-20 sm:py-28"><div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-20">
+      <div className="relative mx-auto grid aspect-square w-full max-w-md place-items-center"><div className="absolute inset-0 rounded-full border border-blue-200" /><div className="absolute inset-[12%] rounded-full border border-dashed border-blue-300" /><div className="absolute inset-[24%] rounded-full bg-blue-100" /><div className="relative grid size-28 place-items-center rounded-[2rem] bg-blue-700 text-white shadow-2xl shadow-blue-300"><ShieldCheck className="size-12" /></div><span className="absolute left-[4%] top-[24%] grid size-12 place-items-center rounded-2xl bg-white text-blue-700 shadow-lg"><LockKeyhole className="size-5" /></span><span className="absolute bottom-[15%] right-[3%] grid size-12 place-items-center rounded-2xl bg-white text-emerald-600 shadow-lg"><Activity className="size-5" /></span></div>
+      <div><p className="eyebrow">Seguridad desde el diseño</p><h2 className="section-title mt-4">La información de tu escuela, cuidada todos los días.</h2><p className="mt-6 text-lg leading-8 text-slate-600">El acceso a datos sensibles requiere control y trazabilidad. Alumnix organiza los permisos y protege cada interacción dentro de la plataforma.</p><div className="mt-8 grid gap-3 sm:grid-cols-2">{checks.map((item) => <div key={item} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4"><span className="grid size-7 shrink-0 place-items-center rounded-full bg-emerald-100"><Check className="size-4 text-emerald-700" /></span><span className="text-sm font-bold text-slate-700">{item}</span></div>)}</div></div>
+    </div></section>
+  )
+}
+
+function StepsSection() {
+  const steps = [["01", "Conocemos tu institución", "Relevamos cómo trabaja tu equipo y qué necesita ordenar."], ["02", "Configuramos Alumnix", "Preparamos cursos, usuarios y permisos para empezar con una base clara."], ["03", "Acompañamos el inicio", "Capacitamos al equipo y damos soporte durante la implementación."]]
+  return (
+    <section className="bg-white py-20 sm:py-28"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">Implementación acompañada</p><h2 className="section-title mt-4">Empezar es más simple de lo que parece.</h2></div><div className="relative mt-14 grid gap-5 lg:grid-cols-3"><div className="absolute left-[16%] right-[16%] top-10 hidden border-t border-dashed border-blue-300 lg:block" />{steps.map(([number, title, text]) => <article key={number} className="relative rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_20px_50px_-38px_rgba(15,23,42,0.5)]"><span className="grid size-14 place-items-center rounded-2xl bg-blue-700 text-sm font-bold text-white">{number}</span><h3 className="mt-7 text-xl font-bold text-slate-950">{title}</h3><p className="mt-3 leading-7 text-slate-600">{text}</p></article>)}</div></div></section>
+  )
+}
+
+function FAQSection() {
+  const faqs = [["¿Alumnix funciona en celulares?", "Sí. La plataforma se adapta a celulares, tablets y computadoras para que cada usuario pueda acceder desde el dispositivo que utiliza habitualmente."], ["¿Qué necesita la escuela para usarlo?", "Solo una conexión a internet y un navegador actualizado. El equipo de Alumnix acompaña la configuración inicial y la puesta en marcha."], ["¿Cada persona tiene su propio acceso?", "Sí. Directivos, docentes, preceptores, familias y alumnos ingresan con usuarios individuales y permisos acordes a su rol."]]
+  return (
+    <section className="bg-slate-50 py-20 sm:py-28"><div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20"><div><p className="eyebrow">Preguntas frecuentes</p><h2 className="section-title mt-4">Lo que necesitás saber.</h2><p className="mt-5 leading-7 text-slate-600">Si tenés otra consulta, escribinos y te ayudamos.</p></div><Accordion type="single" collapsible className="space-y-3">{faqs.map(([question, answer], index) => <AccordionItem key={question} value={`item-${index}`} className="rounded-2xl border border-slate-200 bg-white px-5"><AccordionTrigger className="py-5 text-left font-bold text-slate-900 hover:no-underline">{question}</AccordionTrigger><AccordionContent className="pb-5 leading-7 text-slate-600">{answer}</AccordionContent></AccordionItem>)}</Accordion></div></section>
+  )
+}
+
+function ContactSection() {
+  const [formData, setFormData] = useState({ name: "", school: "", email: "", students: "", message: "" })
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setFormData({ ...formData, [event.target.name]: event.target.value })
+  const handleSubmit = (event: React.FormEvent) => { event.preventDefault(); alert(`¡Gracias ${formData.name}! Recibimos tu solicitud para ${formData.school}.`); setFormData({ name: "", school: "", email: "", students: "", message: "" }) }
+  return (
+    <section id="contacto" className="bg-white py-20 sm:py-28"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="overflow-hidden rounded-[2rem] bg-blue-700 shadow-[0_30px_80px_-35px_rgba(29,78,216,0.7)]"><div className="grid lg:grid-cols-[0.85fr_1.15fr]">
+      <div className="relative overflow-hidden p-8 text-white sm:p-12 lg:p-14"><div className="absolute -bottom-24 -left-24 size-72 rounded-full bg-cyan-300/20 blur-2xl" /><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-200">Hablemos</p><h2 className="mt-4 text-balance font-title text-3xl font-semibold leading-tight sm:text-4xl">Descubrí cómo Alumnix puede ayudar a tu escuela.</h2><p className="mt-5 leading-7 text-blue-100">Coordiná una conversación con nuestro equipo y conocé la plataforma aplicada a tu institución.</p><ul className="mt-8 space-y-4">{["Demo personalizada", "Asesoramiento sin compromiso", "Implementación acompañada"].map((item) => <li key={item} className="flex items-center gap-3 text-sm font-bold"><CheckCircle2 className="size-5 text-cyan-300" />{item}</li>)}</ul></div>
+      <form onSubmit={handleSubmit} className="grid gap-5 bg-white p-8 sm:grid-cols-2 sm:p-12 lg:p-14"><div className="space-y-2 sm:col-span-2"><h3 className="text-2xl font-bold text-slate-950">Solicitar una demo</h3><p className="text-sm text-slate-500">Completá tus datos y nos pondremos en contacto.</p></div><div className="space-y-2"><Label htmlFor="name">Nombre completo</Label><Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Juan Pérez" required className="h-12 rounded-xl" /></div><div className="space-y-2"><Label htmlFor="school">Institución</Label><Input id="school" name="school" value={formData.school} onChange={handleChange} placeholder="Nombre de la escuela" required className="h-12 rounded-xl" /></div><div className="space-y-2"><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="nombre@escuela.edu.ar" required className="h-12 rounded-xl" /></div><div className="space-y-2"><Label htmlFor="students">Cantidad de alumnos</Label><Input id="students" name="students" type="number" value={formData.students} onChange={handleChange} placeholder="500" className="h-12 rounded-xl" /></div><div className="space-y-2 sm:col-span-2"><Label htmlFor="message">¿Qué necesitás resolver?</Label><Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Contanos brevemente sobre tu institución..." rows={3} className="rounded-xl" /></div><Button type="submit" className="h-12 rounded-full bg-slate-950 text-base hover:bg-blue-800 sm:col-span-2">Enviar solicitud <ArrowRight /></Button></form>
+    </div></div></div></section>
+  )
+}
+
+function Footer() {
+  return <footer className="border-t border-slate-200 bg-white"><div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-10 sm:px-8 lg:flex-row lg:items-center lg:justify-between"><div className="flex items-center gap-3"><Image src={iconColor} alt="Alumnix" className="size-11 object-contain" /><div><p className="font-bold text-slate-900">Alumnix</p><p className="text-xs text-slate-500">Gestión escolar conectada</p></div></div><nav className="flex flex-wrap gap-x-6 gap-y-3">{navLinks.map((link) => <a key={link.href} href={link.href} className="text-sm font-semibold text-slate-500 hover:text-blue-700">{link.label}</a>)}</nav><p className="text-sm text-slate-400">© {new Date().getFullYear()} Alumnix</p></div></footer>
+}
+
+export default function AlumnixLandingPage() {
+  return <div className="min-h-screen bg-white"><Header /><main><HeroSection /><FeaturesSection /><CommunitySection /><SecuritySection /><StepsSection /><FAQSection /><ContactSection /></main><Footer /></div>
 }

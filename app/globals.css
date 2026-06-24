@@ -4,19 +4,19 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.985 0.002 90);
-  --foreground: oklch(0.18 0.02 260);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.17 0.035 255);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.02 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.02 260);
-  --primary: oklch(0.45 0.15 250);
+  --primary: oklch(0.49 0.22 260);
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.96 0.01 90);
   --secondary-foreground: oklch(0.25 0.02 260);
   --muted: oklch(0.95 0.01 90);
   --muted-foreground: oklch(0.5 0.02 260);
-  --accent: oklch(0.55 0.18 170);
+  --accent: oklch(0.69 0.14 210);
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
@@ -28,7 +28,7 @@
   --chart-3: oklch(0.65 0.12 40);
   --chart-4: oklch(0.7 0.15 300);
   --chart-5: oklch(0.6 0.2 30);
-  --radius: 0.75rem;
+  --radius: 1rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.18 0.02 260);
   --sidebar-primary: oklch(0.45 0.15 250);
@@ -75,8 +75,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-quicksand), 'Quicksand', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: 'Segoe UI', 'Aptos', system-ui, sans-serif;
+  --font-mono: 'Cascadia Code', 'SFMono-Regular', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -116,16 +116,40 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
   }
+  ::selection {
+    background: oklch(0.82 0.09 245);
+    color: oklch(0.18 0.04 255);
+  }
 }
 
 @layer utilities {
   .font-title {
-    font-family: var(--font-montserrat);
+    font-family: 'Segoe UI', 'Aptos Display', system-ui, sans-serif;
+  }
+  .hero-grid {
+    background-image: linear-gradient(to right, rgba(37, 99, 235, 0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 99, 235, 0.055) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+  }
+  .text-gradient {
+    background: linear-gradient(110deg, #1d4ed8 10%, #0891b2 75%);
+    background-clip: text;
+    color: transparent;
+  }
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-blue-700;
+  }
+  .section-title {
+    font-family: 'Segoe UI', 'Aptos Display', system-ui, sans-serif;
+    @apply text-balance text-3xl font-semibold leading-tight tracking-[-0.025em] text-slate-950 sm:text-4xl lg:text-5xl;
   }
 }
