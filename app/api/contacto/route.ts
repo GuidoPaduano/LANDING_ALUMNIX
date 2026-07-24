@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
 
-const DJANGO_URL = (process.env.DJANGO_URL ?? "").replace(/\/$/, "")
+export const dynamic = "force-dynamic"
 
 export async function POST(req: NextRequest) {
+  const DJANGO_URL = (process.env.DJANGO_URL ?? "").replace(/\/$/, "")
   if (!DJANGO_URL) {
     return NextResponse.json({ detail: "Servicio no configurado." }, { status: 503 })
   }
