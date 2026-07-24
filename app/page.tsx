@@ -195,7 +195,8 @@ function ContactSection() {
     setLoading(true)
     setError("")
     try {
-      const res = await fetch("/api/contacto", {
+      const djangoUrl = (process.env.NEXT_PUBLIC_DJANGO_URL ?? "").replace(/\/$/, "")
+      const res = await fetch(`${djangoUrl}/api/contacto/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
