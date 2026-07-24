@@ -73,7 +73,7 @@ function ProductPreview() {
             </aside>
             <div className="min-w-0 flex-1 p-4 sm:p-6">
               <div className="flex items-start justify-between">
-                <div><p className="text-xs font-semibold text-blue-600">Miércoles, 24 de junio</p><h3 className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">Buen día, Dirección</h3></div>
+                <div><p className="text-xs font-semibold text-blue-600">Miércoles, 24 de junio</p><h3 className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">Buen día, Guido</h3></div>
                 <div className="grid size-9 place-items-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">DR</div>
               </div>
               <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-3">
