@@ -148,13 +148,14 @@ function CommunitySection() {
     { icon: LayoutDashboard, role: "Directivos", text: "Una visión completa para gestionar y tomar decisiones." },
     { icon: BookOpen, role: "Docentes", text: "Herramientas ágiles para el trabajo de todos los días." },
     { icon: UserCheck, role: "Preceptores", text: "Seguimiento claro de asistencia y convivencia." },
-    { icon: Users, role: "Familias y alumnos", text: "Información disponible y comunicación más cercana." },
+    { icon: Users, role: "Familias", text: "Información disponible y comunicación más cercana." },
+    { icon: GraduationCap, role: "Alumnos", text: "Acceso a sus notas, asistencia y comunicados en un solo lugar." },
   ]
   return (
     <section id="comunidad" className="overflow-hidden bg-slate-950 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-        <div><p className="eyebrow !text-cyan-300">Una comunidad conectada</p><h2 className="section-title mt-4 !text-white">Cada persona ve exactamente lo que necesita.</h2><p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">Los permisos por rol hacen que la experiencia sea simple, segura y relevante para cada integrante de la institución.</p><Button asChild variant="outline" className="mt-8 h-12 rounded-full border-white/20 bg-white/5 px-6 text-white hover:bg-white hover:text-slate-950"><a href="#contacto">Ver Alumnix en acción <ArrowRight /></a></Button></div>
-        <div className="grid gap-4 sm:grid-cols-2">{roles.map((item, index) => <article key={item.role} className={`rounded-3xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur transition hover:-translate-y-1 hover:bg-white/[0.1] ${index % 2 ? "sm:translate-y-6" : ""}`}><span className="grid size-11 place-items-center rounded-2xl bg-blue-500/15 text-cyan-300"><item.icon className="size-5" /></span><h3 className="mt-6 text-lg font-bold">{item.role}</h3><p className="mt-2 leading-6 text-slate-400">{item.text}</p></article>)}</div>
+        <div><p className="eyebrow !text-cyan-300">Una comunidad conectada</p><h2 className="section-title mt-4 !text-white">Cada usuario ve exactamente lo que necesita.</h2><p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">Los permisos por rol hacen que la experiencia sea simple, segura y relevante para cada integrante de la institución.</p><Button asChild variant="outline" className="mt-8 h-12 rounded-full border-white/20 bg-white/5 px-6 text-white hover:bg-white hover:text-slate-950"><a href="#contacto">Ver Alumnix en acción <ArrowRight /></a></Button></div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{roles.map((item) => <article key={item.role} className="rounded-3xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur transition hover:-translate-y-1 hover:bg-white/[0.1]"><span className="grid size-11 place-items-center rounded-2xl bg-blue-500/15 text-cyan-300"><item.icon className="size-5" /></span><h3 className="mt-6 text-lg font-bold">{item.role}</h3><p className="mt-2 leading-6 text-slate-400">{item.text}</p></article>)}</div>
       </div></div>
     </section>
   )
