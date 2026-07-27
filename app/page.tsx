@@ -54,8 +54,16 @@ function Header() {
   )
 }
 
+const DEMO_NAMES = ["Mariana", "Santiago", "Valentina", "Lucía", "Tomás", "Sofía", "Matías", "Carolina"]
+
+function getDailyName() {
+  const dayIndex = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
+  return DEMO_NAMES[dayIndex % DEMO_NAMES.length]
+}
+
 function ProductPreview() {
   const chart = [38, 56, 43, 72, 61, 82, 74, 91]
+  const greetingName = getDailyName()
   return (
     <div className="relative mx-auto w-full max-w-2xl lg:mx-0">
       <div className="absolute -inset-8 -z-10 rounded-full bg-blue-400/20 blur-3xl" />
@@ -73,7 +81,7 @@ function ProductPreview() {
             </aside>
             <div className="min-w-0 flex-1 p-4 sm:p-6">
               <div className="flex items-start justify-between">
-                <div><p className="text-xs font-semibold text-blue-600">Miércoles, 24 de junio</p><h3 className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">Buen día, Guido</h3></div>
+                <div><p className="text-xs font-semibold text-blue-600">Miércoles, 24 de junio</p><h3 className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">Buen día, {greetingName}</h3></div>
                 <div className="grid size-9 place-items-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">DR</div>
               </div>
               <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-3">
