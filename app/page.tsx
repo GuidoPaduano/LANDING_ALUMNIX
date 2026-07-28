@@ -54,7 +54,7 @@ function Header() {
   )
 }
 
-const DEMO_NAMES = ["Mariana", "Santiago", "Valentina", "Lucía", "Tomás", "Sofía", "Matías", "Carolina"]
+const DEMO_NAMES = ["Mariana", "Santiago", "Valentina", "Lucía", "Tomás", "Marcos", "Matías", "Carolina"]
 
 function getDailyName() {
   const dayIndex = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
