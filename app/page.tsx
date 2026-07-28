@@ -35,9 +35,6 @@ function Header() {
         <nav className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => <a key={link.href} href={link.href} className="text-sm font-semibold text-slate-600 transition hover:text-blue-700">{link.label}</a>)}
         </nav>
-        <Button asChild className="hidden h-11 rounded-full bg-slate-950 px-5 text-white shadow-none hover:bg-blue-700 lg:inline-flex">
-          <a href="https://proyecto-comunicaciones.vercel.app/">Acceso plataforma <ArrowRight /></a>
-        </Button>
         <button type="button" onClick={() => setOpen(!open)} className="grid size-10 place-items-center rounded-full border border-slate-200 text-slate-800 lg:hidden" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open}>
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -46,7 +43,6 @@ function Header() {
         <nav className="border-t border-slate-200 bg-white px-5 py-5 lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-1">
             {navLinks.map((link) => <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="rounded-xl px-3 py-3 font-semibold text-slate-700 hover:bg-slate-50">{link.label}</a>)}
-            <Button asChild className="mt-3 h-11 rounded-full bg-slate-950"><a href="https://proyecto-comunicaciones.vercel.app/" onClick={() => setOpen(false)}>Acceso plataforma <ArrowRight /></a></Button>
           </div>
         </nav>
       )}
