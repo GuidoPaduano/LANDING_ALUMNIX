@@ -34,21 +34,12 @@ export const metadata: Metadata = {
     description:
       "Notas, asistencia, sanciones, mensajería y calendario escolar — todo en un solo lugar. Diseñado para escuelas argentinas.",
     locale: "es_AR",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Alumnix — Gestión escolar integral",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Alumnix | Software de Gestión Escolar para Argentina",
     description:
       "Notas, asistencia, sanciones, mensajería y calendario escolar — todo en un solo lugar.",
-    images: ["/og-image.png"],
   },
   robots: {
     index: true,
