@@ -12,17 +12,7 @@ export const metadata: Metadata = {
     template: "%s | Alumnix",
   },
   description:
-    "Alumnix es el software de gestión escolar todo en uno para Argentina. Notas, asistencia, sanciones, mensajería, boletines y calendario escolar — en una sola plataforma.",
-  keywords: [
-    "software gestión escolar",
-    "sistema escolar argentina",
-    "plataforma educativa",
-    "gestión académica",
-    "notas y asistencia",
-    "boletín escolar digital",
-    "comunicación escolar",
-    "alumnix",
-  ],
+    "Software de gestión escolar para Argentina. Centralizá notas, asistencia, boletines, sanciones, mensajes y calendario en una sola plataforma.",
   alternates: {
     canonical: siteUrl,
   },
@@ -51,22 +41,15 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "SoftwareApplication",
-      name: "Alumnix",
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
       url: siteUrl,
-      applicationCategory: "EducationalApplication",
-      operatingSystem: "Web",
-      description:
-        "Plataforma de gestión escolar integral para instituciones educativas argentinas. Incluye notas, asistencia, sanciones, mensajería y calendario.",
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "ARS",
-        description: "Demo gratuita disponible",
-      },
+      name: "Alumnix",
+      alternateName: "Alumnix Gestión Escolar",
     },
     {
       "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
       name: "Alumnix",
       url: siteUrl,
       logo: `${siteUrl}/icon.png`,
@@ -77,6 +60,16 @@ const jsonLd = {
         areaServed: "AR",
         availableLanguage: "Spanish",
       },
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "Alumnix",
+      url: siteUrl,
+      applicationCategory: "EducationalApplication",
+      operatingSystem: "Web",
+      description:
+        "Plataforma de gestión escolar integral para instituciones educativas argentinas. Incluye notas, asistencia, sanciones, mensajería y calendario.",
+      publisher: { "@id": `${siteUrl}/#organization` },
     },
   ],
 }
