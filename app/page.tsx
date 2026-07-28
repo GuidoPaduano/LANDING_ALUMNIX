@@ -47,7 +47,7 @@ function ProductPreview() {
           </div>
           <div className="flex min-h-[390px] sm:min-h-[450px]">
             <aside className="hidden w-15 shrink-0 flex-col items-center gap-3 border-r border-slate-200 bg-white py-5 sm:flex">
-              <Image src={iconColor} alt="" className="mb-2 size-8 object-contain" />
+              <Image src={iconColor} alt="" className="mb-2 size-8 object-contain" priority />
               {[LayoutDashboard, GraduationCap, ClipboardCheck, Mail, CalendarDays].map((Icon, index) => <div key={index} className={`grid size-9 place-items-center rounded-xl ${index === 0 ? "bg-blue-600 text-white" : "text-slate-400"}`}><Icon className="size-4" /></div>)}
             </aside>
             <div className="min-w-0 flex-1 p-4 sm:p-6">
@@ -168,6 +168,44 @@ function Footer() {
   return <footer className="border-t border-slate-200 bg-white"><div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-10 sm:px-8 lg:flex-row lg:items-center lg:justify-between"><div className="flex items-center gap-3"><Image src={iconColor} alt="Alumnix" className="size-11 object-contain" /><div><p className="font-bold text-slate-900">Alumnix</p><p className="text-xs text-slate-500">Gestión escolar conectada</p></div></div><nav className="flex flex-wrap gap-x-6 gap-y-3">{navLinks.map((link) => <a key={link.href} href={link.href} className="text-sm font-semibold text-slate-500 hover:text-blue-700">{link.label}</a>)}</nav><p className="text-sm text-slate-400">© {new Date().getFullYear()} Alumnix</p></div></footer>
 }
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Alumnix funciona en celulares?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí. La plataforma se adapta a celulares, tablets y computadoras para que cada usuario pueda acceder desde el dispositivo que utiliza habitualmente.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Qué necesita la escuela para usarlo?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Solo una conexión a internet y un navegador actualizado. El equipo de Alumnix acompaña la configuración inicial y la puesta en marcha.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cada persona tiene su propio acceso?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí. Directivos, docentes, preceptores, familias y alumnos ingresan con usuarios individuales y permisos acordes a su rol.",
+      },
+    },
+  ],
+}
+
 export default function AlumnixLandingPage() {
-  return <div className="min-h-screen bg-white"><Header /><main><HeroSection /><FeaturesSection /><CommunitySection /><SecuritySection /><StepsSection /><FAQSection /><ContactSection /></main><Footer /></div>
+  return (
+    <div className="min-h-screen bg-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <Header />
+      <main><HeroSection /><FeaturesSection /><CommunitySection /><SecuritySection /><StepsSection /><FAQSection /><ContactSection /></main>
+      <Footer />
+    </div>
+  )
 }

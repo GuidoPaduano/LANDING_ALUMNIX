@@ -49,24 +49,36 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Alumnix",
-  url: siteUrl,
-  applicationCategory: "EducationalApplication",
-  operatingSystem: "Web",
-  description:
-    "Plataforma de gestión escolar integral para instituciones educativas argentinas. Incluye notas, asistencia, sanciones, mensajería y calendario.",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "ARS",
-    description: "Demo gratuita disponible",
-  },
-  author: {
-    "@type": "Organization",
-    name: "Alumnix",
-    url: siteUrl,
-  },
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      name: "Alumnix",
+      url: siteUrl,
+      applicationCategory: "EducationalApplication",
+      operatingSystem: "Web",
+      description:
+        "Plataforma de gestión escolar integral para instituciones educativas argentinas. Incluye notas, asistencia, sanciones, mensajería y calendario.",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "ARS",
+        description: "Demo gratuita disponible",
+      },
+    },
+    {
+      "@type": "Organization",
+      name: "Alumnix",
+      url: siteUrl,
+      logo: `${siteUrl}/icon.png`,
+      areaServed: "AR",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        areaServed: "AR",
+        availableLanguage: "Spanish",
+      },
+    },
+  ],
 }
 
 export default function RootLayout({
