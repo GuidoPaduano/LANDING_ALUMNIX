@@ -1,21 +1,17 @@
-"use client"
-
 import Image from "next/image"
-import { useState } from "react"
 import {
   Activity, ArrowRight, BarChart3, Bell, BookOpen, CalendarDays, Check,
   CheckCircle2, ClipboardCheck, FileText, GraduationCap,
-  LayoutDashboard, LockKeyhole, Mail, Menu, MessageSquareText, MoreHorizontal,
-  ShieldCheck, UserCheck, Users, X,
+  LayoutDashboard, LockKeyhole, Mail, MessageSquareText, MoreHorizontal,
+  ShieldCheck, UserCheck, Users,
 } from "lucide-react"
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import logoColor from "@/imagenes/Logo Color.png"
 import iconColor from "@/imagenes/Icono Color.png"
+import Header from "./_header"
+import ContactSection from "./_contact-section"
 
 const navLinks = [
   { label: "Plataforma", href: "#plataforma" },
@@ -25,30 +21,6 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
   { label: "Hablemos", href: "#contacto" },
 ]
-
-function Header() {
-  const [open, setOpen] = useState(false)
-  return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl">
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="#" aria-label="Ir al inicio"><Image src={logoColor} alt="Alumnix" className="h-10 w-auto" priority /></a>
-        <nav className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link) => <a key={link.href} href={link.href} className="text-sm font-semibold text-slate-600 transition hover:text-blue-700">{link.label}</a>)}
-        </nav>
-        <button type="button" onClick={() => setOpen(!open)} className="grid size-10 place-items-center rounded-full border border-slate-200 text-slate-800 lg:hidden" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open}>
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
-      </div>
-      {open && (
-        <nav className="border-t border-slate-200 bg-white px-5 py-5 lg:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-1">
-            {navLinks.map((link) => <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="rounded-xl px-3 py-3 font-semibold text-slate-700 hover:bg-slate-50">{link.label}</a>)}
-          </div>
-        </nav>
-      )}
-    </header>
-  )
-}
 
 const DEMO_NAMES = ["Mariana", "Santiago", "Valentina", "Lucía", "Tomás", "Marcos", "Matías", "Carolina"]
 
@@ -189,52 +161,6 @@ function FAQSection() {
   const faqs = [["¿Alumnix funciona en celulares?", "Sí. La plataforma se adapta a celulares, tablets y computadoras para que cada usuario pueda acceder desde el dispositivo que utiliza habitualmente."], ["¿Qué necesita la escuela para usarlo?", "Solo una conexión a internet y un navegador actualizado. El equipo de Alumnix acompaña la configuración inicial y la puesta en marcha."], ["¿Cada persona tiene su propio acceso?", "Sí. Directivos, docentes, preceptores, familias y alumnos ingresan con usuarios individuales y permisos acordes a su rol."]]
   return (
     <section id="faq" className="scroll-mt-18 bg-slate-50 py-20 sm:py-28"><div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20"><div><p className="eyebrow">Preguntas frecuentes</p><h2 className="section-title mt-4">Lo que necesitás saber.</h2><p className="mt-5 leading-7 text-slate-600">Si tenés otra consulta, escribinos y te ayudamos.</p></div><Accordion type="single" collapsible className="space-y-3">{faqs.map(([question, answer], index) => <AccordionItem key={question} value={`item-${index}`} className="rounded-2xl border border-slate-200 bg-white px-5"><AccordionTrigger className="py-5 text-left font-bold text-slate-900 hover:no-underline">{question}</AccordionTrigger><AccordionContent className="pb-5 leading-7 text-slate-600">{answer}</AccordionContent></AccordionItem>)}</Accordion></div></section>
-  )
-}
-
-function ContactSection() {
-  const [formData, setFormData] = useState({ name: "", school: "", email: "", students: "", message: "" })
-  const [loading, setLoading] = useState(false)
-  const [sent, setSent] = useState(false)
-  const [error, setError] = useState("")
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setFormData({ ...formData, [event.target.name]: event.target.value })
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault()
-    setLoading(true)
-    setError("")
-    try {
-      const res = await fetch("/api/contacto", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
-        setError((data as { detail?: string }).detail || "Error al enviar. Intentá más tarde.")
-        return
-      }
-      setSent(true)
-      setFormData({ name: "", school: "", email: "", students: "", message: "" })
-    } catch {
-      setError("Error de conexión. Revisá tu internet e intentá nuevamente.")
-    } finally {
-      setLoading(false)
-    }
-  }
-  return (
-    <section id="contacto" className="scroll-mt-18 bg-white py-20 sm:py-28"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="overflow-hidden rounded-[2rem] bg-blue-700 shadow-[0_30px_80px_-35px_rgba(29,78,216,0.7)]"><div className="grid lg:grid-cols-[0.85fr_1.15fr]">
-      <div className="relative overflow-hidden p-8 text-white sm:p-12 lg:p-14"><div className="absolute -bottom-24 -left-24 size-72 rounded-full bg-cyan-300/20 blur-2xl" /><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-200">Hablemos</p><h2 className="mt-4 text-balance font-title text-3xl font-semibold leading-tight sm:text-4xl">Descubrí cómo Alumnix puede ayudar a tu escuela.</h2><p className="mt-5 leading-7 text-blue-100">Coordiná una conversación con nuestro equipo y conocé la plataforma aplicada a tu institución.</p><ul className="mt-8 space-y-4">{["Demo personalizada", "Asesoramiento sin compromiso", "Implementación acompañada"].map((item) => <li key={item} className="flex items-center gap-3 text-sm font-bold"><CheckCircle2 className="size-5 text-cyan-300" />{item}</li>)}</ul></div>
-      {sent ? (
-        <div className="flex flex-col items-center justify-center gap-4 bg-white p-8 sm:p-12 lg:p-14 text-center">
-          <CheckCircle2 className="size-14 text-blue-600" />
-          <h3 className="text-2xl font-bold text-slate-950">¡Mensaje recibido!</h3>
-          <p className="text-slate-500">Nos pondremos en contacto a la brevedad.</p>
-          <button onClick={() => setSent(false)} className="mt-2 text-sm font-semibold text-blue-600 hover:underline">Enviar otro mensaje</button>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="grid gap-5 bg-white p-8 sm:grid-cols-2 sm:p-12 lg:p-14"><div className="space-y-2 sm:col-span-2"><h3 className="text-2xl font-bold text-slate-950">Solicitar una demo</h3><p className="text-sm text-slate-500">Completá tus datos y nos pondremos en contacto.</p></div><div className="space-y-2"><Label htmlFor="name">Nombre completo</Label><Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Juan Pérez" required className="h-12 rounded-xl" /></div><div className="space-y-2"><Label htmlFor="school">Institución</Label><Input id="school" name="school" value={formData.school} onChange={handleChange} placeholder="Nombre de la escuela" required className="h-12 rounded-xl" /></div><div className="space-y-2"><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="nombre@escuela.edu.ar" required className="h-12 rounded-xl" /></div><div className="space-y-2"><Label htmlFor="students">Cantidad de alumnos</Label><Input id="students" name="students" type="number" value={formData.students} onChange={handleChange} placeholder="500" className="h-12 rounded-xl" /></div><div className="space-y-2 sm:col-span-2"><Label htmlFor="message">¿Qué necesitás resolver?</Label><Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Contanos brevemente sobre tu institución..." rows={3} className="rounded-xl" /></div>{error && <p className="sm:col-span-2 text-sm text-red-600">{error}</p>}<Button type="submit" disabled={loading} className="h-12 rounded-full bg-slate-950 text-base hover:bg-blue-800 sm:col-span-2 disabled:opacity-60">{loading ? "Enviando…" : <><span>Enviar solicitud</span><ArrowRight /></>}</Button></form>
-      )}
-    </div></div></div></section>
   )
 }
 
